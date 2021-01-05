@@ -11,14 +11,14 @@ function updateStatus(){
     let healthy = Object.keys(monitor.servers).filter(i => monitor.servers[i].ok).length;
     let total = Object.keys(monitor.servers).length;
 
-    process.stdout.write(healthy + "/" + total + " CMs (" + (Math.floor((healthy/total)*1000)/10) + "%) - Store " + (web.store ? "OK" : "Not OK") + " / Community " + (web.community ? "OK" : "Not OK") + " / API " + (web.webapi ? "OK" : "Not OK") + "                     \r");
+    process.stdout.write(healthy + "/" + total + " CMs (" + (Math.floor((healthy/total)*1000)/10) + "%) - Store " + (web.store ? "OK" : "Not OK") + " / Community " + (web.community ? "OK" : "Not OK") + " / API " + (web.webapi ? "OK" : "Not OK") + "         \r");
 }
 
 (async () => {
     monitor = new ConnectionMonitor();
     web = new WebMonitor();
 
-    setInterval(updateStatus, 200);
+    setInterval(updateStatus, 10000);
     
     monitor.start();
     setInterval(() => monitor.restart(), 3600000);
