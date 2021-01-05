@@ -1,8 +1,8 @@
 # emily
 
-A microservice that (should?) provide Steam CM status. I didn't really test it in scheduled maintenance yet, but the numbers it gives out make sense when Steam should otherwise be running fine. 
+A microservice that (should?) provide Steam CM and site status. I didn't really test it in scheduled maintenance yet, but the numbers it gives out make sense when Steam should otherwise be running fine. 
 
-It should work for WebSocket and TCP CMs and updates the server list once an hour. Also probably uses quite a bit of RAM, will work on that.
+It should work for WebSocket and TCP CMs and updates the CM list once an hour. Also probably uses quite a bit of RAM, will work on that.
 
 ## Install
 ```bash
