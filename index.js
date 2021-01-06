@@ -1,6 +1,5 @@
 const app = require("express")();
 
-const { webCompatibilityMode } = require("steam-user/resources/default_options");
 const ConnectionMonitor = require("./cm.js");
 const WebMonitor = require("./web.js");
 
@@ -18,7 +17,7 @@ function updateStatus(){
     monitor = new ConnectionMonitor();
     web = new WebMonitor();
 
-    setInterval(updateStatus, 10000);
+    setInterval(updateStatus, 2000);
     
     monitor.start();
     setInterval(() => monitor.restart(), 3600000);

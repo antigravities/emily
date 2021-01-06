@@ -83,7 +83,20 @@ class ConnectionManager {
             this.ok = false;
             this.reason = res.ToString() + ": " + msg;
 
-            setTimeout(() => this.steam.logOn(), 5000);
+            setTimeout(() => {
+                try {
+                    this.steam.logOn()
+                } catch(e) {
+                    if( e.toString().indexOf("Already logged on") > -1 ){
+                        this.ok = true;
+                        console.log("Warning " + this.server + ": steam-user reports logged on, marking as OK and swallowing")
+                        return;
+                    }
+
+                    this.ok = false;
+                    console.log("Error " + this.server + ": " + e); // TODO: something better with this
+                }
+            }, 5000);
         });
 
         this.steam.on("error", err => {
