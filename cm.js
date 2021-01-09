@@ -87,14 +87,10 @@ class ConnectionManager {
                 try {
                     this.steam.logOn()
                 } catch(e) {
-                    if( e.toString().indexOf("Already logged on") > -1 ){
-                        this.ok = true;
-                        console.log("Warning " + this.server + ": steam-user reports logged on, marking as OK and swallowing")
-                        return;
-                    }
-
                     this.ok = false;
                     console.log("Error " + this.server + ": " + e); // TODO: something better with this
+                    this.steam._disconnect();
+                    this.connect();
                 }
             }, 5000);
         });
@@ -111,11 +107,19 @@ class ConnectionManager {
     }
 
     connect(){
-        this.steam.logOn();
+        try {
+            this.steam.logOn();
+        } catch(e){
+            if( e.toString().indexOf("Already logged on") > -1 ){
+                this.ok = true;
+                console.log("Warning " + this.server + ": steam-user reports logged on, marking as OK and swallowing")
+                return;
+            }
+        }
     }
 
     disconnect(){
-        this.steam.logOff();
+        this.steam._disconnect();
     }
 }
 
